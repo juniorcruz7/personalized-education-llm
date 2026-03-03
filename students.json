@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Mirella",
+    "age": 19,
+    "level": "Avançado",
+    "learning_style": "Visual"
+  },
+  {
+    "id": 2,
+    "name": "Marçal",
+    "age": 23,
+    "level": "Intermediário",
+    "learning_style": "Leitura-Escrita"
+  },
+  {
+    "id": 3,
+    "name": "Diego",
+    "age": 16,
+    "level": "Iniciante",
+    "learning_style": "Auditivo"
+  },
+  {
+    "id": 4,
+    "name": "Gabriel",
+    "age": 25,
+    "level": "Intermediário",
+    "learning_style": "Cinestesico"
+  }
+]
