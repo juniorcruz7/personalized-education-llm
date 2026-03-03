@@ -43,9 +43,9 @@ personalized-education-llm/
 ├── PROMPT_ENGINEERING_NOTES.md
 │
 ├── samples/                      # Exemplos de saída JSON
-│   ├── sample_iniciante.json
-│   ├── sample_intermediario.json
-│   └── sample_avancado.json
+│   ├── sample1.json
+│   ├── sample2.json
+│   └── sample3.json
 │
 ├── outputs/                      # Arquivos gerados pelo sistema
 │   ├── cache.json
@@ -164,3 +164,4 @@ Persistência e organização de dados
 👤 Autor
 
 Desenvolvido por Júnior Cruz.
+
