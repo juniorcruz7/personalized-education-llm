@@ -1,58 +1,67 @@
 # Sistema Adaptativo com LLM
 
-Projeto pessoal focado na construção de um sistema adaptativo baseado em Modelos de Linguagem de Grande Escala (LLMs).
+Sistema adaptativo baseado em Modelos de Linguagem de Grande Escala (LLMs), desenvolvido com foco em organização arquitetural, engenharia de prompt e boas práticas de desenvolvimento.
 
-O objetivo é explorar como modelos de linguagem podem ajustar dinamicamente suas respostas com base em padrões de interação, contexto e configuração modular de modelos.
-
-O projeto é estruturado desde o início com foco em organização, escalabilidade e boas práticas de engenharia.
+O projeto explora como modelos de linguagem podem ajustar dinamicamente suas respostas com base em perfil de usuário, contexto e configuração modular.
 
 ---
 
 ## 🚀 Visão Geral
 
-Este sistema foi projetado para:
+O sistema permite:
 
-- Gerar respostas adaptativas utilizando LLMs
-- Permitir troca de modelo sem alterar o código
-- Manter separação clara entre configuração e lógica
-- Suportar evolução para arquitetura mais robusta (memória, avaliação, roteamento de modelos)
-
-A estrutura foi pensada para evoluir de experimento para aplicação escalável.
-
----
-
-## 🧠 Configuração Atual do Modelo
-
-Atualmente, o sistema está configurado para testes com:
-
-
-MODEL_NAME=gemma-3-1b-it
-
-
-Esse modelo leve permite iteração rápida e validação de arquitetura.
-
-A troca para modelos mais avançados pode ser feita apenas alterando variáveis de ambiente, sem necessidade de refatoração.
-
----
-
-## 🏗 Princípios de Arquitetura
-
-- Configuração baseada em variáveis de ambiente
-- Abstração do modelo de linguagem
-- Separação entre lógica e infraestrutura
-- Estrutura de projeto escalável
-- Gerenciamento seguro de chaves de API
-- Ambiente reprodutível
+- Geração de conteúdo adaptado ao perfil do estudante
+- Troca de modelo via variável de ambiente
+- Persistência de histórico em JSON
+- Controle estruturado de saída via engenharia de prompt
+- Arquitetura modular e escalável
 
 ---
 
 ## 🛠 Tecnologias Utilizadas
 
 - Python
-- API Google Gemini
+- Google Gemini API
+- Streamlit (interface)
 - Ambiente virtual (`venv`)
-- Gerenciamento de variáveis de ambiente
-- Estrutura modular para integração com LLM
+- JSON para persistência de dados
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+
+personalized-education-llm/
+│
+├── .venv/                        # Ambiente virtual (ignorado pelo Git)
+├── .env                          # Variáveis locais (ignorado)
+├── .env.example                  # Exemplo de configuração
+├── .gitignore
+├── requirements.txt
+├── README.md
+├── PROMPT_ENGINEERING_NOTES.md
+│
+├── samples/                      # Exemplos de saída JSON
+│   ├── sample_iniciante.json
+│   ├── sample_intermediario.json
+│   └── sample_avancado.json
+│
+├── outputs/                      # Arquivos gerados pelo sistema
+│   ├── cache.json
+│   └── history.json
+│
+├── students.json                 # Base de dados local
+│
+├── main.py                       # Execução via terminal
+├── app.py                        # Interface Streamlit
+├── config.py                     # Configurações do sistema
+├── content_generator.py          # Lógica de geração
+├── prompt_engine.py              # Construção dos prompts
+├── llm_client.py                 # Comunicação com o modelo
+└── storage.py                    # Persistência de dados
+
+```
 
 ---
 
@@ -62,87 +71,95 @@ A troca para modelos mais avançados pode ser feita apenas alterando variáveis 
 
 ```bash
 git clone https://github.com/juniorcruz7/personalized-education-llm.git
-cd SEU_REPOSITORIO
+cd personalized-education-llm
 2️⃣ Criar ambiente virtual
 python -m venv .venv
 
 Ativar:
 
-Windows
+Windows:
 
 .venv\Scripts\activate
 
-Mac/Linux
+Mac/Linux:
 
 source .venv/bin/activate
 3️⃣ Instalar dependências
 pip install -r requirements.txt
-4️⃣ Configurar variáveis de ambiente
+⚙️ Configuração do Ambiente
 
-Criar um arquivo .env na raiz do projeto:
+Criar um arquivo .env na raiz:
 
 GEMINI_API_KEY=sua_chave_aqui
 MODEL_NAME=gemma-3-1b-it
 
-⚠️ O arquivo .env não deve ser versionado.
-Utilize o .env.example como referência.
+O arquivo .env não deve ser versionado.
+Utilize .env.example como referência.
 
-🔁 Alterando o Modelo
+▶️ Como Executar
 
-Para utilizar outro modelo, basta modificar:
+Execução via terminal:
 
-MODEL_NAME=gemini-1.5-flash
+python main.py
 
-Sem necessidade de alterar o código da aplicação.
+Ou execução da interface:
 
-📁 Estrutura do Projeto
-project-root/
-│
-├── .venv/              # Ambiente virtual (ignorado)
-├── .env                # Variáveis locais (ignorado)
-├── .env.example        # Exemplo de configuração
-├── .gitignore
-├── requirements.txt
-└── src/                # Código-fonte
+streamlit run app.py
+📂 Exemplos de Saída
+
+A pasta /samples contém exemplos reais de respostas geradas pelo sistema em formato JSON, conforme exigido no edital.
+
+Esses arquivos demonstram:
+
+Estrutura de resposta
+
+Adaptação por perfil
+
+Persistência em formato estruturado
+
+🧠 Engenharia de Prompt
+
+As estratégias de engenharia de prompt utilizadas no projeto estão documentadas detalhadamente em:
+
+PROMPT_ENGINEERING_NOTES.md
+
+O documento descreve:
+
+Estruturação de prompts
+
+Controle de formato de saída
+
+Estratégias de restrição
+
+Adaptação por nível de usuário
+
+Problemas encontrados e soluções adotadas
+
 🔐 Boas Práticas Aplicadas
 
-Chaves de API isoladas via variáveis de ambiente
+Variáveis sensíveis isoladas em .env
 
-Arquivos sensíveis ignorados pelo Git
+Arquivos críticos ignorados via .gitignore
 
-Histórico limpo (sem versionamento de ambiente virtual)
+Separação clara de responsabilidades
 
-Estrutura preparada para expansão
+Persistência estruturada em JSON
 
-🎯 Próximos Passos
+Arquitetura preparada para evolução
 
- Evoluir para modelo de maior capacidade
+🎯 Conclusão
 
- Implementar camada de memória adaptativa
+O projeto demonstra aplicação prática de:
 
- Criar mecanismo de avaliação de respostas
+Engenharia de Prompt
 
- Implementar roteamento entre múltiplos modelos
+Arquitetura modular em Python
 
- Disponibilizar como API
+Integração com LLM
 
- Containerização com Docker
+Controle estruturado de saída
 
-📌 Filosofia do Projeto
-
-Este projeto busca aplicar princípios reais de engenharia em sistemas baseados em LLM:
-
-Clareza arquitetural
-
-Modularidade
-
-Reprodutibilidade
-
-Preparação para produção
-
-Evolução incremental
-
-Trata-se de uma base experimental com potencial de expansão para aplicações mais robustas.
+Persistência e organização de dados
 
 👤 Autor
 
