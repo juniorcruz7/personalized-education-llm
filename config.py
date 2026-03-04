@@ -1,7 +1,5 @@
-import os
-from dotenv import load_dotenv
+import streamlit as st
 
-load_dotenv()
+API_KEY = st.secrets["GOOGLE_API_KEY"]
 
-API_KEY = os.getenv("GEMINI_API_KEY")
-MODEL_NAME = os.getenv("MODEL_NAME")
+MODEL_NAME = "gemini-1.5-flash"
