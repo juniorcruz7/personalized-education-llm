@@ -80,27 +80,21 @@ if main_option == "Gerar Conteúdo":
             with st.spinner("Gerando conteúdo personalizado..."):
 
                 if content_type == "Explicação":
-                    visual = False
                     result = generate_explanation(topic, student_profile)
 
                 elif content_type == "Exemplos":
-                    visual = False
                     result = generate_examples(topic, student_profile)
 
                 elif content_type == "Reflexão":
-                    visual = False
                     result = generate_reflection_questions(topic, student_profile)
 
                 else:
-                    visual = True
                     result = generate_visual_summary(topic, student_profile)
 
             st.markdown("---")
             st.markdown("## 📄 Resultado")
-            if visual:
-                st.code(result)
-            else:
-                st.markdown(result)
+            st.markdown(result)
+
 
 #Histórico
 else:
