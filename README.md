@@ -4,6 +4,12 @@ Sistema adaptativo baseado em Modelos de Linguagem de Grande Escala (LLMs), dese
 
 O projeto explora como modelos de linguagem podem ajustar dinamicamente suas respostas com base em perfil de usuário, contexto e configuração modular.
 
+## 🌐 Acesse a Aplicação
+
+A aplicação pode ser acessada em:
+
+🔗 https://adaptive-prompt-education.streamlit.app/
+
 ---
 
 ## 🚀 Visão Geral
@@ -164,4 +170,5 @@ Persistência e organização de dados
 👤 Autor
 
 Desenvolvido por Júnior Cruz.
+
 
