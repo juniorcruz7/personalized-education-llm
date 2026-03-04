@@ -1,174 +1,145 @@
-# Sistema Adaptativo com LLM
+# 📚 Sistema Educacional Inteligente
 
-Sistema adaptativo baseado em Modelos de Linguagem de Grande Escala (LLMs), desenvolvido com foco em organização arquitetural, engenharia de prompt e boas práticas de desenvolvimento.
+Plataforma educativa que gera conteúdo personalizado para alunos de diferentes perfis usando técnicas avançadas de engenharia de prompt com a API do Google Gemini.
 
-O projeto explora como modelos de linguagem podem ajustar dinamicamente suas respostas com base em perfil de usuário, contexto e configuração modular.
-
-## 🌐 Acesse a Aplicação
-
-A aplicação pode ser acessada em:
-
-🔗 https://adaptive-prompt-education.streamlit.app/
+Desenvolvido como solução para o **Desafio Técnico de Estágio em IA e Engenharia de Prompt**.
 
 ---
 
-## 🚀 Visão Geral
+## 🎯 Funcionalidades
 
-O sistema permite:
-
-- Geração de conteúdo adaptado ao perfil do estudante
-- Troca de modelo via variável de ambiente
-- Persistência de histórico em JSON
-- Controle estruturado de saída via engenharia de prompt
-- Arquitetura modular e escalável
-
----
-
-## 🛠 Tecnologias Utilizadas
-
-- Python
-- Google Gemini API
-- Streamlit (interface)
-- Ambiente virtual (`venv`)
-- JSON para persistência de dados
+- Seleção de perfil de aluno com dados de idade, nível e estilo de aprendizado
+- Geração de 4 tipos de conteúdo educativo personalizado:
+  - **Explicação Conceitual** — com estrutura didática e profundidade adaptada ao nível
+  - **Exemplos Práticos** — contextualizados para faixa etária e estilo de aprendizado
+  - **Perguntas de Reflexão** — que estimulam pensamento crítico
+  - **Resumo Visual** — mapa mental em ASCII ou diagrama hierárquico
+- Sistema de **cache** para evitar chamadas desnecessárias à API
+- **Histórico** de execuções salvo em JSON com timestamp
+- Interface web com **Streamlit** e interface de linha de comando (**CLI**)
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🧠 Técnicas de Engenharia de Prompt Utilizadas
+
+| Técnica | Aplicação |
+|---|---|
+| **Persona Prompting** | O modelo assume o papel de "especialista em ensino adaptativo e didática personalizada" |
+| **Context Setting** | Perfil completo do aluno (nome, idade, nível, estilo) é injetado em cada prompt |
+| **Chain-of-Thought** | Instruções de formato obrigatório guiam o modelo a estruturar a resposta progressivamente |
+| **Output Formatting** | Formato Markdown detalhado com seções obrigatórias é especificado em cada prompt |
+| **Adaptive Prompting** | As instruções mudam dinamicamente de acordo com o nível, idade e estilo de aprendizado do aluno |
+
+> Para mais detalhes, consulte o arquivo [`PROMPT_ENGINEERING_NOTES.md`](./PROMPT_ENGINEERING_NOTES.md).
+
+---
+
+## 🗂️ Estrutura do Projeto
 
 ```
-
-personalized-education-llm/
-│
-├── .venv/                        # Ambiente virtual (ignorado pelo Git)
-├── .env                          # Variáveis locais (ignorado)
-├── .env.example                  # Exemplo de configuração
+📦 projeto/
+├── app.py                      # Interface web com Streamlit
+├── main.py                     # Interface CLI
+├── content_generator.py        # Orquestra a geração dos 4 tipos de conteúdo
+├── prompt_engine.py            # Constrói prompts dinâmicos por perfil
+├── llm_client.py               # Comunicação com a API do Google Gemini
+├── config.py                   # Configurações e chaves de API
+├── storage.py                  # Cache, histórico e persistência em JSON
+├── students.json               # Perfis dos alunos cadastrados
+├── requirements.txt            # Dependências do projeto
+├── .env.example                # Exemplo de variáveis de ambiente
 ├── .gitignore
-├── requirements.txt
-├── README.md
 ├── PROMPT_ENGINEERING_NOTES.md
-│
-├── samples/                      # Exemplos de saída JSON
-│   ├── sample1.json
-│   ├── sample2.json
-│   └── sample3.json
-│
-├── outputs/                      # Arquivos gerados pelo sistema
-│   ├── cache.json
-│   └── history.json
-│
-├── students.json                 # Base de dados local
-│
-├── main.py                       # Execução via terminal
-├── app.py                        # Interface Streamlit
-├── config.py                     # Configurações do sistema
-├── content_generator.py          # Lógica de geração
-├── prompt_engine.py              # Construção dos prompts
-├── llm_client.py                 # Comunicação com o modelo
-└── storage.py                    # Persistência de dados
-
+├── outputs/
+│   ├── cache.json              # Cache de respostas geradas
+│   └── history.json            # Histórico de execuções
+└── samples/
+    ├── sample1.json
+    ├── sample2.json
+    ├── sample3.json
+    └── sample4.json
 ```
 
 ---
 
-## 📦 Instalação
+## 🚀 Como Executar
 
-### 1️⃣ Clonar o repositório
+### Pré-requisitos
+
+- Python 3.9+
+- Conta e chave de API no [Google AI Studio](https://aistudio.google.com/)
+
+### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/juniorcruz7/personalized-education-llm.git
-cd personalized-education-llm
-2️⃣ Criar ambiente virtual
-python -m venv .venv
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+```
 
-Ativar:
+### 2. Instale as dependências
 
-Windows:
-
-.venv\Scripts\activate
-
-Mac/Linux:
-
-source .venv/bin/activate
-3️⃣ Instalar dependências
+```bash
 pip install -r requirements.txt
-⚙️ Configuração do Ambiente
+```
 
-Criar um arquivo .env na raiz:
+### 3. Configure as variáveis de ambiente
 
-GEMINI_API_KEY=sua_chave_aqui
-MODEL_NAME=gemma-3-1b-it
+Crie um arquivo `.env` na raiz do projeto com base no `.env.example`:
 
-O arquivo .env não deve ser versionado.
-Utilize .env.example como referência.
+```bash
+cp .env.example .env
+```
 
-▶️ Como Executar
+Edite o `.env` e insira sua chave:
 
-Execução via terminal:
+```
+GEMINI_API_KEY=your_api_key_here
+```
 
-python main.py
+> ⚠️ **Nunca suba o arquivo `.env` para o repositório.** Ele já está listado no `.gitignore`.
 
-Ou execução da interface:
+### 4. Execute a aplicação
 
+**Interface Web (Streamlit):**
+```bash
 streamlit run app.py
-📂 Exemplos de Saída
+```
 
-A pasta /samples contém exemplos reais de respostas geradas pelo sistema em formato JSON, conforme exigido no edital.
+**Interface CLI:**
+```bash
+python main.py
+```
 
-Esses arquivos demonstram:
+---
 
-Estrutura de resposta
+## 👤 Perfis de Alunos Disponíveis
 
-Adaptação por perfil
+| Nome | Idade | Nível | Estilo de Aprendizado |
+|---|---|---|---|
+| Mirella | 19 | Avançado | Visual |
+| Marçal | 23 | Intermediário | Leitura-Escrita |
+| Diego | 16 | Iniciante | Auditivo |
+| Gabriel | 25 | Intermediário | Cinestésico |
 
-Persistência em formato estruturado
+---
 
-🧠 Engenharia de Prompt
+## 🔄 Sistema de Cache
 
-As estratégias de engenharia de prompt utilizadas no projeto estão documentadas detalhadamente em:
+O cache é salvo em `outputs/cache.json`. A chave é gerada a partir de:
 
-PROMPT_ENGINEERING_NOTES.md
+```
+{nome_aluno}_{topico}_{tipo_conteudo}
+```
 
-O documento descreve:
+Se já existir uma resposta para a mesma combinação, ela é retornada diretamente do cache, sem nova chamada à API.
 
-Estruturação de prompts
+---
 
-Controle de formato de saída
+## 📦 Dependências
 
-Estratégias de restrição
-
-Adaptação por nível de usuário
-
-Problemas encontrados e soluções adotadas
-
-🔐 Boas Práticas Aplicadas
-
-Variáveis sensíveis isoladas em .env
-
-Arquivos críticos ignorados via .gitignore
-
-Separação clara de responsabilidades
-
-Persistência estruturada em JSON
-
-Arquitetura preparada para evolução
-
-🎯 Conclusão
-
-O projeto demonstra aplicação prática de:
-
-Engenharia de Prompt
-
-Arquitetura modular em Python
-
-Integração com LLM
-
-Controle estruturado de saída
-
-Persistência e organização de dados
-
-👤 Autor
-
-Desenvolvido por Júnior Cruz.
-
+```
+google-genai
+python-dotenv
+streamlit
+```
 
