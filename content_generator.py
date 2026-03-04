@@ -29,9 +29,7 @@ def generate_explanation(topic: str, student_profile: dict) -> str:
 
     instruction = f"""
     Explique o tema de forma didática e organizada.
-
     {depth_instruction}
-
     Regras: Use apenas Markdown simples. Não use emojis fora dos títulos. Não mencione que é uma IA.
 
     FORMATO OBRIGATÓRIO (use Markdown):
@@ -102,14 +100,10 @@ def generate_examples(topic: str, student_profile: dict) -> str:
 
     instruction = f"""
     Forneça exemplos claros e variados sobre o tema.
-    
     {context_instruction}
     {depth_instruction}
     {style_instruction}
-
-    Regras:
-    - Use Markdown.
-    - Mantenha organização visual.
+    Regras: Use Markdown. Mantenha organização visual.
 
     FORMATO OBRIGATÓRIO (use Markdown):
 
@@ -154,21 +148,13 @@ def generate_reflection_questions(topic: str, student_profile: dict) -> str:
 
     #Ajuste por nível cognitivo
     if level == "Iniciante":
-        complexity_instruction = """
-        Gere perguntas simples que estimulem curiosidade
-        e compreensão básica do tema.
-        """
+        complexity_instruction = "Gere perguntas simples que estimulem curiosidade e compreensão básica do tema."
+
     elif level == "Intermediário":
-        complexity_instruction = """
-        Gere perguntas que incentivem análise e conexão
-        entre o tema e situações do cotidiano.
-        """
+        complexity_instruction = "Gere perguntas que incentivem análise e conexão entre o tema e situações do cotidiano."
+
     else:
-        complexity_instruction = """
-        Gere perguntas que estimulem pensamento crítico profundo,
-        análise de consequências, comparação de cenários e
-        formulação de hipóteses.
-        """
+        complexity_instruction = "Gere perguntas que estimulem pensamento crítico profundo, análise de consequências, comparação de cenários e formulação de hipóteses."
 
     #Ajuste leve por idade
     if age <= 13:
@@ -178,13 +164,9 @@ def generate_reflection_questions(topic: str, student_profile: dict) -> str:
 
     instruction = f"""
     Estimule pensamento crítico sobre o tema.
-
     {complexity_instruction}
     {age_instruction}
-
-    Regras:
-    - Use Markdown.
-    - Não responda as perguntas.
+    Regras: Use Markdown.Não responda as perguntas.
 
     FORMATO OBRIGATÓRIO (use Markdown):
 
@@ -203,7 +185,7 @@ def generate_reflection_questions(topic: str, student_profile: dict) -> str:
 
     store_response_in_cache(student_name, topic, "Reflexão", response)
 
-    add_to_history(student_name, topic, "Reflexão", "cache", cached)
+    add_to_history(student_name, topic, "Reflexão", "api", response)
 
     return response
 
@@ -231,26 +213,21 @@ def generate_visual_summary(topic: str, student_profile: dict) -> str:
     else:
         depth_instruction = "Inclua estrutura detalhada com múltiplas conexões entre conceitos."
 
+    if learning_style == "visual":
+        format_instruction = "Crie um mapa mental em ASCII usando: Setas (→), ramificações, estrutura em árvore"
+
+    else:
+        format_instruction = "Crie um diagrama hierárquico estruturado em formato de tópicos."
+
     instruction = f"""
-    Crie um diagrama ASCII (sem texto introdutório, apenas um título) em formato de várias pequenas caixas que são separadas em subtopicos com caracteristicas importantes desses subtopicos.
+    Gere um resumo visual estruturado sobre o tema.
+
+    Regras: 
+    - É proibido o uso de textos explicativos. 
+    - Não inclua exemplos, apenas estrutura visual organizada. - Use espaçamento adequado.
 
     {depth_instruction}
-
-    REGRAS ABSOLUTAS:
-
-    - NÃO use "*"
-    - NÃO use "**"
-    - NÃO use listas com "-"
-    - NÃO use numeração
-    - NÃO use Markdown
-    - NÃO use negrito
-    - NÃO use títulos em Markdown
-    - NÃO use dois pontos ":"
-    - As caixas devem ser feitas apenas caracteres ASCII.
-    - É de EXTREMA IMPORTÂNCIA que voce se atente a formatação da caixa, tentando ao MÁXIMO CENTRALIZAR O CONTEÚDO dentro das caixas
-    - Não passe de 40 linhas de conteúdo
-
-    Se usar qualquer símbolo de Markdown, reescreva.
+    {format_instruction}
     """
         
     prompt = build_prompt(topic, student_profile, instruction)
