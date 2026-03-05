@@ -225,7 +225,6 @@ Isso mantém todas as variáveis constantes, isolando o impacto da mudança no p
 
 ## 11. Limitações Identificadas
 
-- **Modelos menores** (ex: `gemma-3-1b-it`) apresentam menor aderência a formatações rígidas e maior tendência a ignorar restrições comportamentais.
 - **Qualidade dependente do perfil:** uma classificação incorreta de nível ou estilo gera conteúdo inadequado.
 - **Sem avaliação semântica automática:** a qualidade do conteúdo é avaliada manualmente.
 - **Resumos ASCII** exigem maior capacidade do modelo para serem bem estruturados.
@@ -254,3 +253,4 @@ A engenharia de prompt neste projeto foi tratada como **componente arquitetural 
 - Separação clara entre construção de prompt e execução
 - Infraestrutura de rastreabilidade para experimentação controlada
 - Uso combinado de persona prompting, context setting, output formatting e negative prompting
+
