@@ -192,7 +192,6 @@ def generate_reflection_questions(topic: str, student_profile: dict) -> str:
 
 def generate_visual_summary(topic: str, student_profile: dict) -> str:
     student_name = student_profile["name"]    
-    learning_style = student_profile["learning_style"]
     level = student_profile["level"]
 
     #Verifica cache antes de tudo
@@ -213,21 +212,17 @@ def generate_visual_summary(topic: str, student_profile: dict) -> str:
     else:
         depth_instruction = "Inclua estrutura detalhada com múltiplas conexões entre conceitos."
 
-    if learning_style == "visual":
-        format_instruction = "Crie um mapa mental em ASCII usando: Setas (→), ramificações, estrutura em árvore"
-
-    else:
-        format_instruction = "Crie um diagrama hierárquico estruturado em formato de tópicos."
-
     instruction = f"""
     Gere um resumo visual estruturado sobre o tema.
 
     Regras: 
+    - Faça um resumo todo estruturado em forma de mapa mental, com setas apontando para caixas 
     - É proibido o uso de textos explicativos. 
-    - Não inclua exemplos, apenas estrutura visual organizada. - Use espaçamento adequado.
+    - Não inclua exemplos, apenas estrutura visual organizada. 
+    - Use espaçamento adequado.
+    - A estrutura do mapa mental deve conter somente ASCII
 
     {depth_instruction}
-    {format_instruction}
     """
         
     prompt = build_prompt(topic, student_profile, instruction)
