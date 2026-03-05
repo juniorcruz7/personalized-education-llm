@@ -17,6 +17,7 @@ Desenvolvido como solução para o **Desafio Técnico de Estágio em IA e Engenh
 - Sistema de **cache** para evitar chamadas desnecessárias à API
 - **Histórico** de execuções salvo em JSON com timestamp
 - Interface web com **Streamlit** e interface de linha de comando (**CLI**)
+- Modelo padrão atual: `gemini-2.5-flash`
 
 ---
 
@@ -142,4 +143,5 @@ google-genai
 python-dotenv
 streamlit
 ```
+
 
